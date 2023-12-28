@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catégories</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+
+<body>
+<header>
+    <nav>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                <img src="/images/logo.png" width="100" height="70" class="d-inline-block align-top rounded-circle" alt="MonLogo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Entrées</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sorties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Objectifs Epargne</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/categories">Catégories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">A propos</a>
+                    </li>
+                    <!-- Ajoutez d'autres liens de navigation si nécessaire -->
+                </ul>
+
+            </div>
+        </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h1>Liste des catégories</h1>
+        <table border="1" class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="categorie : ${categories}">
+                    <td th:text="${categorie.getNom()}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div th:if="${totalPages > 1}">
+            <div class="row col-sm-10">
+                <div class="col-sm-3">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class="col-sm-4">
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}" th:href="@{'/categories/page/' + ${i}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                    </span>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/categories/page/' + ${currentPage + 1}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/categories/page/' + ${totalPages}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inclure Bootstrap CSS et JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</main>
+</body>
+
+</html>
