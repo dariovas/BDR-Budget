@@ -1,16 +1,18 @@
 package ch.heig.bdr.budget.categorie.repository.impl;
 
 import ch.heig.bdr.budget.categorie.domain.Categorie;
-import ch.heig.bdr.budget.categorie.mapper.CategoryMapper;
+import ch.heig.bdr.budget.categorie.mapper.CategorieMapper;
 import ch.heig.bdr.budget.categorie.repository.CategorieRepository;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class CategorieRepositoryImpl implements CategorieRepository {
-    private CategoryMapper mapper;
+    private CategorieMapper mapper;
 
-    public CategorieRepositoryImpl(CategoryMapper mapper) {
+    public CategorieRepositoryImpl(CategorieMapper mapper) {
         this.mapper = mapper;
     }
 
@@ -20,7 +22,7 @@ public class CategorieRepositoryImpl implements CategorieRepository {
     }
 
     @Override
-    public List<Categorie> findAll(PageRequest pageRequest){
+    public List<Categorie> getAllCategories(){
         return mapper.selectAll();
     }
 }

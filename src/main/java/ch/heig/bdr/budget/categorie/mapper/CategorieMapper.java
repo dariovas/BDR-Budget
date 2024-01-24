@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 @Mapper
-public interface CategoryMapper {
+public interface CategorieMapper {
     @Select("SELECT * FROM Categorie WHERE id = #{id}")
     Categorie select(Long id);
 
@@ -17,4 +17,6 @@ public interface CategoryMapper {
 
     @Update("UPDATE Categorie SET ")
     Categorie update();
+
+
 }
