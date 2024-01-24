@@ -11,6 +11,10 @@ import javax.sql.DataSource;
 
 @Configuration
 @MapperScan("ch.heig.bdr.budget.categorie.mapper")
+@MapperScan("ch.heig.bdr.budget.bdgt.mapper")
+@MapperScan("ch.heig.bdr.budget.entree.mapper")
+@MapperScan("ch.heig.bdr.budget.sortie.mapper")
+@MapperScan("ch.heig.bdr.budget.objEpargne.mapper")
 public class DatasourceConfiguration {
 
     @Bean

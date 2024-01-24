@@ -17,6 +17,4 @@ public interface CategorieMapper {
 
     @Update("UPDATE Categorie SET ")
     Categorie update();
-
-
 }

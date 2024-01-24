@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -13,17 +12,17 @@ import java.util.List;
 @Controller
 @RequestMapping("/categories")
 public class CategorieController {
-    private final CategorieRepository categorieRepository;
+    private final CategorieRepository repository;
 
     public CategorieController(CategorieRepository categorieRepository) {
-        this.categorieRepository = categorieRepository;
+        this.repository = categorieRepository;
     }
 
     @GetMapping("/page/{pageNo}")
     public String listPaginatedCategories(@PathVariable(value = "pageNo") int pageNo, Model model) {
 
         int pageSize = 3;
-        List<Categorie> categories = categorieRepository.getAllCategories();
+        List<Categorie> categories = repository.getAllCategories();
         int startIndex = (pageNo - 1) * pageSize;
         int endIndex = Math.min(startIndex + pageSize, categories.size());
 
@@ -41,7 +40,6 @@ public class CategorieController {
     public String viewCategories(Model model){
         return listPaginatedCategories(1, model);
     }
-
 
     /**
     @PostMapping()
