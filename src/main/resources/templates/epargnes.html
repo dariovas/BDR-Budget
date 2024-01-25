@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Catégories</title>
+    <title>Dépenses</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 
@@ -31,19 +31,19 @@
                             <a class="dropdown-item" href="#">Recette</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSortie" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sortie
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/depenses">Dépense</a>
+                            <a class="dropdown-item active" href="/depenses">Dépense</a>
                             <a class="dropdown-item" href="#">Epargne</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Objectifs Epargne</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/categories">Catégories</a>
                     </li>
                     <li class="nav-item">
@@ -58,19 +58,21 @@
 
 <main>
     <div class="container">
-        <h1>Liste des catégories</h1>
+        <h1>Liste des dépenses</h1>
         <table border="1" class="table table-striped table-responsive-md">
             <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Nom catégorie parent</th>
-                </tr>
+            <tr>
+                <th>Montant</th>
+                <th>Montant Objectif</th>
+                <th>Nom catégorie</th>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="categorie : ${categories}">
-                    <td th:text="${categorie.getNom()}"></td>
-                    <td th:text="${categorie.getNom_categorie_parente()}"></td>
-                </tr>
+            <tr th:each="epargne : ${epargnes}">
+                <td th:text="${epargne.getMontant_budget()}"></td>
+                <td th:text="${epargne.getMontantobjectif()}"></td>
+                <td th:text="${epargne.getNom()}"></td>
+            </tr>
             </tbody>
         </table>
 
@@ -81,17 +83,17 @@
                 </div>
                 <div class="col-sm-4">
                     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-      <a th:if="${currentPage != i}" th:href="@{'/categories/page/' + ${i}}">[[${i}]]</a>
+      <a th:if="${currentPage != i}" th:href="@{'/epargnes/page/' + ${i}}">[[${i}]]</a>
       <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
                     </span>
                 </div>
                 <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/categories/page/' + ${currentPage + 1}}">Next</a>
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/epargnes/page/' + ${currentPage + 1}}">Next</a>
                     <span th:unless="${currentPage < totalPages}">Next</span>
                 </div>
 
                 <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/categories/page/' + ${currentPage - 1}}">Last</a>
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/epargnes/page/' + ${currentPage -1}}">Last</a>
                     <span th:unless="${currentPage < totalPages}">Last</span>
                 </div>
             </div>

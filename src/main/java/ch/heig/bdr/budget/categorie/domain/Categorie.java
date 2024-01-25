@@ -6,6 +6,8 @@ public class Categorie {
     private String description;
     private Long idParent;
 
+    private String nom_categorie_parente;
+
     public Long getId() {
         return id;
     }
@@ -30,4 +32,11 @@ public class Categorie {
         this.description = description;
     }
 
+    public String getNom_categorie_parente() {
+        return nom_categorie_parente;
+    }
+
+    public void setNom_categorie_parente(String nom_categorie_parente) {
+        this.nom_categorie_parente = nom_categorie_parente;
+    }
 }
