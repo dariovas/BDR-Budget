@@ -1,8 +1,6 @@
 package ch.heig.bdr.budget.depense.mapper;
 
-import ch.heig.bdr.budget.categorie.domain.Categorie;
 import ch.heig.bdr.budget.depense.domain.Depense;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import java.util.List;
@@ -14,6 +12,4 @@ public interface DepenseMapper {
 
     @Select("SELECT * FROM vue_depense")
     List<Depense> selectAll();
-
-    
 }

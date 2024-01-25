@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public class EpargneRepositoryImpl implements EpargneRepository {
     private EpargneMapper mapper;
 
+    public EpargneRepositoryImpl(EpargneMapper mapper) {
+        this.mapper = mapper;
+    }
 }

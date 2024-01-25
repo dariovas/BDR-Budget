@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 @MapperScan("ch.heig.bdr.budget.recette.mapper")
 @MapperScan("ch.heig.bdr.budget.revenu.mapper")
 @MapperScan("ch.heig.bdr.budget.recurrence.mapper")
-@MapperScan("ch.heig.bdr.budget.epargne.mapper")
 @MapperScan("ch.heig.bdr.budget.objEpargne.mapper")
 public class DatasourceConfiguration {
 

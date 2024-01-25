@@ -19,14 +19,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li class="nav-item dropdown">
                         <a class="nav-link" href="/">Accueil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Entrées</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownEntree" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Entrées
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Revenu</a>
+                            <a class="dropdown-item" href="#">Recette</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sorties</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSortie" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sortie
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/depenses">Dépense</a>
+                            <a class="dropdown-item" href="#">Epargne</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Objectifs Epargne</a>
@@ -39,9 +51,9 @@
                     </li>
                     <!-- Ajoutez d'autres liens de navigation si nécessaire -->
                 </ul>
-
             </div>
         </nav>
+    </nav>
 </header>
 
 <main>

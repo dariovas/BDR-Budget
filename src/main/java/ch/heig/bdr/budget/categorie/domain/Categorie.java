@@ -2,7 +2,6 @@ package ch.heig.bdr.budget.categorie.domain;
 
 public class Categorie {
     private Long id;
-
     private String nom;
     private String description;
     private Long idParent;

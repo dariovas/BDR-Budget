@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 public class RevenuRepositoryImpl implements RevenuRepository {
     private RevenuMapper mapper;
 
-
+    public RevenuRepositoryImpl(RevenuMapper mapper) {
+        this.mapper = mapper;
+    }
 }

@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public class RecetteRepositoryImpl implements RecetteRepository {
     private RecetteMapper mapper;
 
+    public RecetteRepositoryImpl(RecetteMapper mapper) {
+        this.mapper = mapper;
+    }
 }
