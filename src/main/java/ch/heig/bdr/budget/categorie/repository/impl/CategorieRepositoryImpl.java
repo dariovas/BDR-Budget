@@ -25,4 +25,11 @@ public class CategorieRepositoryImpl implements CategorieRepository {
     public List<Categorie> getAllCategories(){
         return mapper.selectAll();
     }
+
+    @Override
+    public void addCategorie(Categorie categorie) {
+        mapper.insert(categorie);
+    }
+
+
 }

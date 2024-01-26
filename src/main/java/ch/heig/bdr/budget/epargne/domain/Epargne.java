@@ -1,5 +1,8 @@
 package ch.heig.bdr.budget.epargne.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Epargne {
     private Long id_budget;
     private int anneemois;
@@ -7,12 +10,6 @@ public class Epargne {
     private Long idCategorie;
     private double montant_budget;
     private Long idobjep;
-
-    private Long idcategorieobjectif;
-    private int anneemoisobjectif;
-    private int numeromoisobjectif;
-    private  double montantobjectif;
-
     private String nom;
 
     public Long getId_budget() {
@@ -61,38 +58,6 @@ public class Epargne {
 
     public void setIdobjep(Long idobjep) {
         this.idobjep = idobjep;
-    }
-
-    public Long getIdcategorieobjectif() {
-        return idcategorieobjectif;
-    }
-
-    public void setIdcategorieobjectif(Long idcategorieobjectif) {
-        this.idcategorieobjectif = idcategorieobjectif;
-    }
-
-    public int getAnneemoisobjectif() {
-        return anneemoisobjectif;
-    }
-
-    public void setAnneemoisobjectif(int anneemoisobjectif) {
-        this.anneemoisobjectif = anneemoisobjectif;
-    }
-
-    public int getNumeromoisobjectif() {
-        return numeromoisobjectif;
-    }
-
-    public void setNumeromoisobjectif(int numeromoisobjectif) {
-        this.numeromoisobjectif = numeromoisobjectif;
-    }
-
-    public double getMontantobjectif() {
-        return montantobjectif;
-    }
-
-    public void setMontantobjectif(double montantobjectif) {
-        this.montantobjectif = montantobjectif;
     }
 
     public String getNom() {

@@ -9,4 +9,5 @@ import java.util.List;
 public interface CategorieRepository {
     List<Categorie> findByNom(String nom);
     List<Categorie> getAllCategories();
+    void addCategorie(Categorie categorie);
 }

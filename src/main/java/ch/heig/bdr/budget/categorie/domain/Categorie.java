@@ -24,6 +24,14 @@ public class Categorie {
         this.id = id;
     }
 
+    public Long getIdParent() {
+        return idParent;
+    }
+
+    public void setIdParent(Long idParent) {
+        this.idParent = idParent;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }

@@ -1,9 +1,7 @@
 package ch.heig.bdr.budget.categorie.mapper;
 
 import ch.heig.bdr.budget.categorie.domain.Categorie;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -24,4 +22,8 @@ public interface CategorieMapper {
 
     @Update("UPDATE Categorie SET ")
     Categorie update();
+
+    @Insert("INSERT INTO Categorie (nom, description) VALUES (#{nom}, #{description})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(Categorie categorie);
 }

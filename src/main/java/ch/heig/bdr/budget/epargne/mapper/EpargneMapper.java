@@ -12,7 +12,7 @@ public interface EpargneMapper {
     Epargne select(Long id);
 
     @Select("SELECT * FROM vue_epargne\n" +
-            "INNER JOIN categorie ON vue_epargne.idcategorieobjectif = categorie.id")
+            "INNER JOIN categorie ON vue_epargne.idCategorie = categorie.id")
     List<Epargne> selectAll();
 
 }

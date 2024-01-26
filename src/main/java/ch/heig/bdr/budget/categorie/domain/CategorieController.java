@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -41,9 +42,16 @@ public class CategorieController {
         return listPaginatedCategories(1, model);
     }
 
-    /**
-    @PostMapping()
-    public Categorie add(Categorie categorie);
-    **/
+    @GetMapping("/add")
+    public String showAddForm(Model model){
+        model.addAttribute("categorie", new Categorie());
+        return "ajoutCategorie";
+    }
+    @PostMapping("/add")
+    public String add(Categorie categorie){
+        repository.addCategorie(categorie);
+
+        return "redirect:/categories";
+    }
 
 }
