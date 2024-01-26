@@ -11,8 +11,7 @@ public interface EpargneMapper {
     @Select("SELECT * FROM vue_epargne WHERE id = #{id}")
     Epargne select(Long id);
 
-    @Select("SELECT * FROM vue_epargne\n" +
-            "INNER JOIN categorie ON vue_epargne.idCategorie = categorie.id")
+    @Select("SELECT * FROM vue_epargne")
     List<Epargne> selectAll();
 
 }

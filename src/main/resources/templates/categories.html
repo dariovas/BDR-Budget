@@ -19,7 +19,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/">Accueil</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -27,8 +27,8 @@
                             Entrées
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Revenu</a>
-                            <a class="dropdown-item" href="#">Recette</a>
+                            <a class="dropdown-item" href="/revenus">Revenu</a>
+                            <a class="dropdown-item" href="/recettes">Recette</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -37,13 +37,13 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/depenses">Dépense</a>
-                            <a class="dropdown-item" href="#">Epargne</a>
+                            <a class="dropdown-item" href="/epargnes">Epargne</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Objectifs Epargne</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/categories">Catégories</a>
                     </li>
                     <li class="nav-item">
@@ -93,13 +93,12 @@
                     </span>
                 </div>
                 <div class="col-sm-1">
+                    <a th:if="${currentPage > 1}" th:href="@{'/categories/page/' + ${currentPage - 1}}">Last</a>
+                    <span th:unless="${currentPage > 1}">Last</span>
+                </div>
+                <div class="col-sm-1">
                     <a th:if="${currentPage < totalPages}" th:href="@{'/categories/page/' + ${currentPage + 1}}">Next</a>
                     <span th:unless="${currentPage < totalPages}">Next</span>
-                </div>
-
-                <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/categories/page/' + ${currentPage - 1}}">Last</a>
-                    <span th:unless="${currentPage < totalPages}">Last</span>
                 </div>
             </div>
         </div>

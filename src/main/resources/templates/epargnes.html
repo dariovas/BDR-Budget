@@ -19,7 +19,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/">Accueil</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -27,17 +27,17 @@
                             Entrées
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Revenu</a>
-                            <a class="dropdown-item" href="#">Recette</a>
+                            <a class="dropdown-item" href="/revenus">Revenu</a>
+                            <a class="dropdown-item" href="/recettes">Recette</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown active">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSortie" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sortie
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item active" href="/depenses">Dépense</a>
-                            <a class="dropdown-item" href="#">Epargne</a>
+                            <a class="dropdown-item" href="/depenses">Dépense</a>
+                            <a class="dropdown-item" href="/epargnes">Epargne</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -70,7 +70,8 @@
             <tbody>
             <tr th:each="epargne : ${epargnes}">
                 <td th:text="${epargne.getMontant_budget()}"></td>
-                <td th:text="${epargne.getNom()}"></td>
+                <td th:text="${epargne.getMontantobjectif()}"></td>
+                <td th:text="${epargne.getNom_categorie()}"></td>
             </tr>
             </tbody>
         </table>
@@ -87,13 +88,12 @@
                     </span>
                 </div>
                 <div class="col-sm-1">
+                    <a th:if="${currentPage > 1}" th:href="@{'/epargnes/page/' + ${currentPage -1}}">Last</a>
+                    <span th:unless="${currentPage > 1}">Last</span>
+                </div>
+                <div class="col-sm-1">
                     <a th:if="${currentPage < totalPages}" th:href="@{'/epargnes/page/' + ${currentPage + 1}}">Next</a>
                     <span th:unless="${currentPage < totalPages}">Next</span>
-                </div>
-
-                <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/epargnes/page/' + ${currentPage -1}}">Last</a>
-                    <span th:unless="${currentPage < totalPages}">Last</span>
                 </div>
             </div>
         </div>
