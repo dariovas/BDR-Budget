@@ -20,4 +20,9 @@ public class DepenseRepositoryImpl implements DepenseRepository {
     public List<Depense> getAllDepenses() {
         return mapper.selectAll();
     }
+
+    @Override
+    public void addDepense(Depense depense) {
+        mapper.insert(depense);
+    }
 }

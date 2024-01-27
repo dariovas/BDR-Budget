@@ -1,11 +1,13 @@
 package ch.heig.bdr.budget.depense.domain;
 
 
+import ch.heig.bdr.budget.categorie.domain.Categorie;
 import ch.heig.bdr.budget.depense.repository.DepenseRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -40,6 +42,18 @@ public class DepenseController {
     @GetMapping
     public String viewDepenses(Model model){
         return listPaginatedDepenses(1, model);
+    }
+
+    @GetMapping("/add")
+    public String showAddForm(Model model){
+        model.addAttribute("depense", new Depense());
+        return "ajoutDepense";
+    }
+    @PostMapping("/add")
+    public String add(Depense depense){
+        repository.addDepense(depense);
+
+        return "redirect:/depenses";
     }
 
 }

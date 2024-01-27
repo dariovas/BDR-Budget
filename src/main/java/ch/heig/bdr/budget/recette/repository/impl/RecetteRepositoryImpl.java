@@ -19,4 +19,9 @@ public class RecetteRepositoryImpl implements RecetteRepository {
     public List<Recette> getAllRecettes() {
         return mapper.selectAll();
     }
+
+    @Override
+    public void addRecette(Recette recette) {
+        mapper.insert(recette);
+    }
 }

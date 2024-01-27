@@ -19,4 +19,9 @@ public class EpargneRepositoryImpl implements EpargneRepository {
     public List<Epargne> getAllEpargne() {
         return mapper.selectAll();
     }
+
+    @Override
+    public void addEpargne(Epargne epargne) {
+        mapper.insert(epargne);
+    }
 }

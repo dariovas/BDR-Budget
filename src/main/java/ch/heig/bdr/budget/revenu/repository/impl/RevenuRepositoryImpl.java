@@ -19,4 +19,9 @@ public class RevenuRepositoryImpl implements RevenuRepository {
     public List<Revenu> getAllRevenus() {
         return mapper.selectAll();
     }
+
+    @Override
+    public void addRevenus(Revenu revenu) {
+        mapper.insert(revenu);
+    }
 }

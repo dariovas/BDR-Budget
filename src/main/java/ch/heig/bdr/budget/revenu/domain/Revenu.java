@@ -16,6 +16,7 @@ public class Revenu {
     public void setId_budget(Long id_budget) {
         this.id_budget = id_budget;
     }
+    public void setId(Long id){this.id_budget = id;}
 
     public int getAnneemois() {
         return anneemois;

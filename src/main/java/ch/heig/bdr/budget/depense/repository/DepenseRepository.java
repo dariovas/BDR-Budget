@@ -7,4 +7,6 @@ import java.util.List;
 public interface DepenseRepository {
     List<Depense> getAllDepenses();
 
+    void addDepense(Depense depense);
+
 }

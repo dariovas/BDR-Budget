@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Les balises head et les liens vers les feuilles de style et les scripts JS vont ici -->
+</head>
+
+<body>
+<div class="container">
+    <h1>Ajouter un revenu</h1>
+    <form th:action="@{/epargnes/add}" th:object="${epargne}" method="post">
+        <!-- Ajoutez les champs du formulaire ici, par exemple : -->
+        <label for="annee">Année :</label>
+        <input type="text" id="annee" name="nom" th:field="*{anneemois}" required>
+        <label for="mois">Mois :</label>
+        <input type="text" id="mois" name="nom" th:field="*{numeromois}">
+        <label for="categorie">ID Catégorie :</label>
+        <input type="text" id="categorie" name="nom" th:field="*{idCategorie}">
+        <label for="montant">Montant :</label>
+        <input type="text" id="montant" name="nom" th:field="*{montant_budget}">
+        <label for="idobjep">ID Objectif Epargne :</label>
+        <input type="text" id="idobjep" name="nom" th:field="*{idobjep}">
+        <!-- Ajoutez d'autres champs du formulaire au besoin -->
+
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+</div>
+
+<!-- Les scripts JS peuvent aller ici -->
+</body>
+
+</html>

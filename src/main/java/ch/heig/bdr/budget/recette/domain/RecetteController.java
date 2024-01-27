@@ -1,11 +1,13 @@
 package ch.heig.bdr.budget.recette.domain;
 
+import ch.heig.bdr.budget.categorie.domain.Categorie;
 import ch.heig.bdr.budget.depense.domain.Depense;
 import ch.heig.bdr.budget.recette.repository.RecetteRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -39,4 +41,16 @@ public class RecetteController {
 
     @GetMapping
     public String viewRecettes(Model model){return listPaginatedRecettes(1, model); }
+
+    @GetMapping("/add")
+    public String showAddForm(Model model){
+        model.addAttribute("recette", new Recette());
+        return "ajoutRecette";
+    }
+    @PostMapping("/add")
+    public String add(Recette recette){
+        repository.addRecette(recette);
+
+        return "redirect:/recettes";
+    }
 }
