@@ -16,6 +16,9 @@
             padding-top: 100px; /* Ajustez la marge supérieure pour le contenu */
             color: white; /* Couleur du texte */
         }
+        .table th, .table td {
+            color: white; /* Couleur du texte pour les cellules du tableau */
+        }
     </style>
 </head>
 <body>
@@ -68,8 +71,30 @@
 </header>
 
 <div class="container">
-    <h1>Bienvenue sur notre site</h1>
-    <p>Contenu de votre page d'accueil...</p>
+    <h1>Bienvenue sur notre calculateur de budget</h1>
+    <br>
+    <h2>Résumé du mois en cours</h2>
+    <br>
+    <h3 th:text="'Total : ' + ${home.getTotal()}"></h3>
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Total Revenue</th>
+            <th>Total Recette</th>
+            <th>Total Dépense</th>
+            <th>Total Epargne</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${home.getTotal_revenus()}"></td>
+            <td th:text="${home.getTotal_recettes()}"></td>
+            <td th:text="${home.getTotal_depenses()}"></td>
+            <td th:text="${home.getTotal_epargnes()}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

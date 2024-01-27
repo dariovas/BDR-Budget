@@ -1,6 +1,5 @@
 package ch.heig.bdr.budget.depense.repository;
 
-import ch.heig.bdr.budget.categorie.domain.Categorie;
 import ch.heig.bdr.budget.depense.domain.Depense;
 
 import java.util.List;
