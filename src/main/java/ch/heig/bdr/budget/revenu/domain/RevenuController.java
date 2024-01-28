@@ -69,9 +69,10 @@ public class RevenuController {
                 recurrence.setNumeromois(revenu.getRecurrenceNumeroMois());
                 recurrence.setTouslesnmois(revenu.getRecurrenceTousLesNMois());
                 recurrenceRepository.addRecurrence(recurrence);
+            }else {
+                recurrence.setTouslesnmois(revenu.getRecurrenceTousLesNMois());
+                recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
             }
-            recurrence.setTouslesnmois(revenu.getRecurrenceTousLesNMois());
-            recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
 
         }
 

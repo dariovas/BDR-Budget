@@ -8,7 +8,7 @@ public class Depense {
     private double montant_budget;
     private String beneficiaire;
 
-    private boolean hasRecurence = false;
+    private boolean hasRecurrence = false;
     private Integer recurrenceAnneeMois;
     private Integer recurrenceNumeroMois;
     private Integer recurrenceTousLesNMois;
@@ -65,19 +65,15 @@ public class Depense {
         this.beneficiaire = beneficiaire;
     }
 
-    public void setHasRecurence(boolean recurence){this.hasRecurence = recurence;}
+    public void setHasRecurrence(boolean recurence){this.hasRecurrence = recurence;}
 
-    public boolean getHasRecurrence(){return this.hasRecurence;}
+    public boolean getHasRecurrence(){return this.hasRecurrence;}
 
     public Integer getRecurrenceAnneeMois(){
         return this.recurrenceAnneeMois;
     }
 
-    public void setRecurrenceAnneeMois(String recurrenceAnneeMois){
-        this.recurrenceAnneeMois = Integer.parseInt(recurrenceAnneeMois);
-    }
-
-    public void setRecurrenceAnneeMois(int recurrenceAnneeMois){
+    public void setRecurrenceAnneeMois(Integer recurrenceAnneeMois){
         this.recurrenceAnneeMois = recurrenceAnneeMois;
     }
 
@@ -85,23 +81,15 @@ public class Depense {
         return this.recurrenceNumeroMois;
     }
 
-    public void setRecurrenceNumeroMois(int recurrenceNumeroMois){
+    public void setRecurrenceNumeroMois(Integer recurrenceNumeroMois){
         this.recurrenceNumeroMois = recurrenceNumeroMois;
-    }
-
-    public void setRecurrenceNumeroMois(String recurrenceNumeroMois){
-        this.recurrenceNumeroMois = Integer.parseInt(recurrenceNumeroMois);
     }
 
     public Integer getRecurrenceTousLesNMois() {
         return recurrenceTousLesNMois;
     }
 
-    public void setRecurrenceTousLesNMois(int recurrenceTousLesNMois) {
+    public void setRecurrenceTousLesNMois(Integer recurrenceTousLesNMois) {
         this.recurrenceTousLesNMois = recurrenceTousLesNMois;
-    }
-
-    public void setRecurrenceTousLesNMois(String recurrenceTousLesNMois) {
-        this.recurrenceTousLesNMois = Integer.parseInt(recurrenceTousLesNMois);
     }
 }

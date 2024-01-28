@@ -2,10 +2,8 @@ package ch.heig.bdr.budget.depense.mapper;
 
 import ch.heig.bdr.budget.depense.domain.Depense;
 import ch.heig.bdr.budget.categorie.domain.Categorie;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
 @Mapper
 public interface DepenseMapper {
@@ -16,8 +14,8 @@ public interface DepenseMapper {
     @Select("SELECT * FROM vue_depense")
     List<Depense> selectAll();
 
-    @Select("SELECT * FROM vue_depense WHERE beneficiaire LIKE '#{name}'")
-    List<Depense> selectByBeneficiaire(String name);
+    @Select("SELECT * FROM vue_depense WHERE beneficiaire LIKE #{name}")
+    List<Depense> selectByBeneficiaire(@Param("name") String name);
     @Insert("WITH InsertionBudget AS (\n" +
             "    INSERT INTO budget(anneeMois, numeroMois, idCategorie, montant)\n" +
             "    VALUES (#{anneemois}, #{numeromois}, #{idCategorie}, #{montant_budget}) \n" +

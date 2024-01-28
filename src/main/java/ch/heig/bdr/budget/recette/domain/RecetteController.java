@@ -69,9 +69,10 @@ public class RecetteController {
                 recurrence.setNumeromois(recette.getRecurrenceNumeroMois());
                 recurrence.setTouslesnmois(recette.getRecurrenceTousLesNMois());
                 recurrenceRepository.addRecurrence(recurrence);
+            }else {
+                recurrence.setTouslesnmois(recette.getRecurrenceTousLesNMois());
+                recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
             }
-            recurrence.setTouslesnmois(recette.getRecurrenceTousLesNMois());
-            recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
 
         }
 

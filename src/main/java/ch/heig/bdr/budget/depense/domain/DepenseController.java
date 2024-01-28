@@ -28,11 +28,18 @@ public class DepenseController {
 
     @GetMapping("/page/{pageNo}")
     public String listPaginatedDepenses(@PathVariable(value = "pageNo") int pageNo,
-                                        @ModelAttribute DepenseSearchDTO depenseSearchDTO,
+                                        @RequestParam(name = "beneficiaire", required = false) String beneficiaire,
                                         Model model)  {
         int pageSize = 3;
 
-        List<Depense> depenses = repository.getAllDepenses();
+        List<Depense> depenses;
+        if (beneficiaire != null && !beneficiaire.isEmpty()) {
+            // Si un bénéficiaire est fourni, filtrer les résultats
+            depenses = repository.searchDepenseByBeneficiaire(beneficiaire);
+        } else {
+            // Sinon, obtenir toutes les dépenses
+            depenses = repository.getAllDepenses();
+        }
 
         int startIndex = (pageNo - 1) * pageSize;
         int endIndex = Math.min(startIndex + pageSize, depenses.size());
@@ -49,10 +56,7 @@ public class DepenseController {
 
     @GetMapping
     public String viewDepenses(@ModelAttribute DepenseSearchDTO depenseSearchDTO, Model model) {
-        int pageNo = depenseSearchDTO.getPageNo();
-        String beneficiaire = depenseSearchDTO.getBeneficiaire();
-
-        return listPaginatedDepenses(pageNo, depenseSearchDTO, model);
+        return listPaginatedDepenses(depenseSearchDTO.getPageNo(), depenseSearchDTO.getBeneficiaire(), model);
     }
     @ModelAttribute("depenseSearchDTO")
     public DepenseSearchDTO depenseSearchDTO() {
@@ -77,12 +81,11 @@ public class DepenseController {
                 recurrence.setNumeromois(depense.getRecurrenceNumeroMois());
                 recurrence.setTouslesnmois(depense.getRecurrenceTousLesNMois());
                 recurrenceRepository.addRecurrence(recurrence);
+            }else{
+                recurrence.setTouslesnmois(depense.getRecurrenceTousLesNMois());
+                recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
             }
-            recurrence.setTouslesnmois(depense.getRecurrenceTousLesNMois());
-            recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
-
         }
-
         return "redirect:/depenses";
     }
 

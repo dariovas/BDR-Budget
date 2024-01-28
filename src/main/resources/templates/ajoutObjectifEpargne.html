@@ -2,20 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <!-- Les balises head et les liens vers les feuilles de style et les scripts JS vont ici -->
+
 </head>
 
 <body>
 <div class="container">
   <h1>Ajouter un objectif d'épargne</h1>
   <form th:action="@{/objectifEpargnes/add}" th:object="${objEpargne}" method="post">
-
     <label for="montant">Montant :</label>
-    <input type="text" id="montant" name="montant" th:field="*{montant}" required>
+    <input type="number" id="montant" name="montant" th:field="*{montant}" required>
     <label for="annee">Année :</label>
-    <input type="text" id="annee" name="annee" th:field="*{anneemois}" required>
+    <input type="number" id="annee" name="annee" th:field="*{anneemois}" required>
     <label for="mois">Mois :</label>
-    <input type="text" id="mois" name="mois" th:field="*{numeromois}" required>
+    <input type="number" id="mois" name="mois" th:field="*{numeromois}" required>
     <label for="categorie">Catégorie :</label>
     <select id="categorie" name="idCategorie">
       <option th:each="categorie : ${categories}"
@@ -28,7 +27,6 @@
   </form>
 </div>
 
-<!-- Les scripts JS peuvent aller ici -->
 </body>
 
 </html>
