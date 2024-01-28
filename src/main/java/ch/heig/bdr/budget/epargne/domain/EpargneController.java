@@ -2,8 +2,9 @@ package ch.heig.bdr.budget.epargne.domain;
 
 import ch.heig.bdr.budget.categorie.domain.Categorie;
 import ch.heig.bdr.budget.categorie.repository.CategorieRepository;
-import ch.heig.bdr.budget.depense.domain.Depense;
 import ch.heig.bdr.budget.epargne.repository.EpargneRepository;
+import ch.heig.bdr.budget.objEpargne.domain.ObjEpargne;
+import ch.heig.bdr.budget.objEpargne.repository.ObjEpargneRepository;
 import ch.heig.bdr.budget.recurrence.domain.Recurrence;
 import ch.heig.bdr.budget.recurrence.repository.RecurrenceRepository;
 import org.springframework.stereotype.Controller;

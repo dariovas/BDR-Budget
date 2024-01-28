@@ -11,6 +11,8 @@ public class ObjEpargne {
     private int moisrestant;
     private int idCategorie;
 
+    private String nomCategorie;
+
     public int getIdCategorie() {
         return idCategorie;
     }
@@ -65,5 +67,13 @@ public class ObjEpargne {
 
     public void setNumeromois(int numeromois) {
         this.numeromois = numeromois;
+    }
+
+    public String getNomCategorie() {
+        return nomCategorie;
+    }
+
+    public void setNomCategorie(String nomCategorie) {
+        this.nomCategorie = nomCategorie;
     }
 }

@@ -67,6 +67,7 @@
       <thead>
       <tr>
         <th>Montant Objectif</th>
+        <th>Catégorie de l'objectif</th>
         <th>Année de fin</th>
         <th>Mois de fin</th>
         <th>Montant épargné</th>
@@ -76,6 +77,7 @@
       <tbody>
       <tr th:each="objectifEpargne : ${objEpargnes}">
         <td th:text="${objectifEpargne.getMontant()}"></td>
+        <td th:text="${objectifEpargne.getNomCategorie()}"></td>
         <td th:text="${objectifEpargne.getAnneemois()}"></td>
         <td th:text="${objectifEpargne.getNumeromois()}"></td>
         <td th:text="${objectifEpargne.getMontantepargne()}"></td>
