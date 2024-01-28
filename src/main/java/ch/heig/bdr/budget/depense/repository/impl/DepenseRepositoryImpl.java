@@ -22,6 +22,11 @@ public class DepenseRepositoryImpl implements DepenseRepository {
     }
 
     @Override
+    public List<Depense> getDepensesFromBenificiaire(String name) {
+        return mapper.selectByBeneficiaire(name);
+    }
+
+    @Override
     public void addDepense(Depense depense) {
         mapper.insert(depense);
     }

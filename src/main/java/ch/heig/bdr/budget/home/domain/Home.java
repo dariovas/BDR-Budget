@@ -1,8 +1,13 @@
 package ch.heig.bdr.budget.home.domain;
 
 public class Home {
-    private int mois;
+    private String mois;
     private int annee;
+
+    private double avg_epargnes;
+    private double avg_depenses;
+    private double avg_recettes;
+    private double avg_revenus;
 
     private double total_epargnes;
     private double total_depenses;
@@ -41,11 +46,11 @@ public class Home {
         this.total_revenus = total_revenus;
     }
 
-    public int getMois() {
+    public String getMois() {
         return mois;
     }
 
-    public void setMois(int mois) {
+    public void setMois(String mois) {
         this.mois = mois;
     }
 
@@ -59,5 +64,38 @@ public class Home {
 
     public double getTotal(){
         return total_revenus + total_recettes - total_depenses -total_epargnes;
+    }
+
+
+    public double getAvg_epargnes() {
+        return avg_epargnes;
+    }
+
+    public void setAvg_epargnes(double avg_epargnes) {
+        this.avg_epargnes = avg_epargnes;
+    }
+
+    public double getAvg_depenses() {
+        return avg_depenses;
+    }
+
+    public void setAvg_depenses(double avg_depenses) {
+        this.avg_depenses = avg_depenses;
+    }
+
+    public double getAvg_recettes() {
+        return avg_recettes;
+    }
+
+    public void setAvg_recettes(double avg_recettes) {
+        this.avg_recettes = avg_recettes;
+    }
+
+    public double getAvg_revenus() {
+        return avg_revenus;
+    }
+
+    public void setAvg_revenus(double avg_revenus) {
+        this.avg_revenus = avg_revenus;
     }
 }

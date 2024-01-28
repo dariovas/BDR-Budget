@@ -55,13 +55,10 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Objectifs Epargne</a>
+                        <a class="nav-link" href="objectifEpargnes">Objectifs Epargne</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/categories">Catégories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">A propos</a>
                     </li>
                     <!-- Ajoutez d'autres liens de navigation si nécessaire -->
                 </ul>
@@ -73,30 +70,59 @@
 <div class="container">
     <h1>Bienvenue sur notre calculateur de budget</h1>
     <br>
-    <h2>Résumé du mois en cours</h2>
+    <h2>Vue d'ensemble des totaux regroupés par mois</h2>
     <br>
-    <h3 th:text="'Total : ' + ${home.getTotal()}"></h3>
 
     <table border="1" class="table table-striped table-responsive-md">
         <thead>
         <tr>
-            <th>Année</th>
             <th>Mois</th>
-            <th>Total Revenue</th>
-            <th>Total Recette</th>
-            <th>Total Dépense</th>
-            <th>Total Epargne</th>
+            <th>Année</th>
+            <th>Revenu</th>
+            <th>Recette</th>
+            <th>Dépense</th>
+            <th>Epargne</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td th:text="${recette.getAnnee()}"></td>
-            <td th:text="${recette.getMois()}"></td>
-            <td th:text="${recette.getTotal_recettes()}"></td>
+        <tr th:each="home : ${homes}">
+            <td th:text="${home.getMois()}"></td>
+            <td th:text="${home.getAnnee()}"></td>
+            <td th:text="${home.getTotal_revenus()}"></td>
+            <td th:text="${home.getTotal_recettes()}"></td>
+            <td th:text="${home.getTotal_depenses()}"></td>
             <td th:text="${home.getTotal_epargnes()}"></td>
+        </tr>
+        <tr>
+            <td colspan="2">Moyennes des 12 mois précédents</td>
+            <td th:text="${homesAvg.getAvg_revenus()}"></td>
+            <td th:text="${homesAvg.getAvg_recettes()}"></td>
+            <td th:text="${homesAvg.getAvg_depenses()}"></td>
+            <td th:text="${homesAvg.getAvg_epargnes()}"></td>
         </tr>
         </tbody>
     </table>
+    <div th:if="${totalPages > 1}">
+        <div class="row col-sm-10">
+            <div class="col-sm-3">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class="col-sm-4">
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                    </span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">Last</a>
+                <span th:unless="${currentPage > 1}">Last</span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

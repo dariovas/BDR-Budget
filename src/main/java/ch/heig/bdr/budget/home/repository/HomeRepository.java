@@ -8,8 +8,7 @@ import java.util.List;
 public interface HomeRepository {
     Home getAllHomes();
 
-    Home getTotalDepenseByMonth();
-    Home getTotalRecetteByMonth();
-    Home getTotalRevenuByMonth();
-    Home getTotalEpargneByMonth();
+    List<Home> getTotalByMonth();
+
+    Home getAvgLast12Month();
 }

@@ -16,6 +16,8 @@ public interface DepenseMapper {
     @Select("SELECT * FROM vue_depense")
     List<Depense> selectAll();
 
+    @Select("SELECT * FROM vue_depense WHERE beneficiaire LIKE '#{name}'")
+    List<Depense> selectByBeneficiaire(String name);
     @Insert("WITH InsertionBudget AS (\n" +
             "    INSERT INTO budget(anneeMois, numeroMois, idCategorie, montant)\n" +
             "    VALUES (#{anneemois}, #{numeromois}, #{idCategorie}, #{montant_budget}) \n" +

@@ -26,4 +26,9 @@ public class RecurrenceRepositoryImpl implements RecurrenceRepository {
     public void addRecurrence(Recurrence recurrence) {
         mapper.insert(recurrence);
     }
+
+    @Override
+    public void addRecurrenceWithoutEnd(Recurrence recurrence){
+        mapper.insertWithoutEnd(recurrence);
+    }
 }

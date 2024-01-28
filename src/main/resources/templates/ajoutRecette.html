@@ -24,7 +24,20 @@
         <input type="text" id="montant" name="nom" th:field="*{montant_budget}">
         <label for="origine">Origine :</label>
         <input type="text" id="origine" name="nom" th:field="*{origine}">
-        <!-- Ajoutez d'autres champs du formulaire au besoin -->
+
+        <div>
+            <input type="checkbox" id="hasRecurence" name="hasRecurence">
+            <label for="hasRecurence">Activer la récurrence</label>
+        </div>
+
+        <label for="recurrenceAnneeMois">Année de fin de la récurrence :</label>
+        <input type="text" id="recurrenceAnneeMois" name="recurrenceAnneeMois">
+
+        <label for="recurrenceNumeroMois">Mois de la fin de la récurrence :</label>
+        <input type="text" id="recurrenceNumeroMois" name="recurrenceNumeroMois">
+
+        <label for="recurrenceTousLesNMois">Répéter tous les N mois :</label>
+        <input type="text" id="recurrenceTousLesNMois" name="recurrenceTousLesNMois">
 
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>

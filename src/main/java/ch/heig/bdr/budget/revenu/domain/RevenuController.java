@@ -1,6 +1,8 @@
 package ch.heig.bdr.budget.revenu.domain;
 import ch.heig.bdr.budget.categorie.domain.Categorie;
 import ch.heig.bdr.budget.categorie.repository.CategorieRepository;
+import ch.heig.bdr.budget.recurrence.domain.Recurrence;
+import ch.heig.bdr.budget.recurrence.repository.RecurrenceRepository;
 import ch.heig.bdr.budget.revenu.repository.RevenuRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,13 @@ import java.util.List;
 public class RevenuController {
     private final RevenuRepository repository;
     private final CategorieRepository categorieRepository;
+    private final RecurrenceRepository recurrenceRepository;
 
-    public RevenuController(RevenuRepository repository, CategorieRepository categorieRepository) {
+    public RevenuController(RevenuRepository repository, CategorieRepository categorieRepository,
+                            RecurrenceRepository recurrenceRepository) {
         this.repository = repository;
         this.categorieRepository = categorieRepository;
+        this.recurrenceRepository = recurrenceRepository;
     }
 
     @GetMapping("/page/{pageNo}")
@@ -55,6 +60,20 @@ public class RevenuController {
     @PostMapping("/add")
     public String add(Revenu revenu){
         repository.addRevenus(revenu);
+
+        if(revenu.getHasRecurrence()){
+            Recurrence recurrence = new Recurrence();
+            recurrence.setIdbudget(revenu.getId());
+            if(revenu.getRecurrenceAnneeMois() != null){
+                recurrence.setAnneemois(revenu.getRecurrenceAnneeMois());
+                recurrence.setNumeromois(revenu.getRecurrenceNumeroMois());
+                recurrence.setTouslesnmois(revenu.getRecurrenceTousLesNMois());
+                recurrenceRepository.addRecurrence(recurrence);
+            }
+            recurrence.setTouslesnmois(revenu.getRecurrenceTousLesNMois());
+            recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
+
+        }
 
         return "redirect:/revenus";
     }

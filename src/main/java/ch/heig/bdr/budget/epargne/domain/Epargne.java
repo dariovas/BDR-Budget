@@ -1,7 +1,7 @@
 package ch.heig.bdr.budget.epargne.domain;
 
 public class Epargne {
-    private Long id_budget;
+    private Long id;
     private int anneemois;
     private int numeromois;
     private Long idCategorie;
@@ -11,14 +11,15 @@ public class Epargne {
 
     private double montantobjectif;
 
-    public Long getId_budget() {
-        return id_budget;
-    }
+    private boolean hasRecurence = false;
+    private Integer recurrenceAnneeMois;
+    private Integer recurrenceNumeroMois;
+    private Integer recurrenceTousLesNMois;
 
-    public void setId_budget(Long id_budget) {
-        this.id_budget = id_budget;
+    public Long getId() {
+        return id;
     }
-    public void setId(Long id){this.id_budget = id_budget;}
+    public void setId(Long id){this.id = this.id;}
 
     public int getAnneemois() {
         return anneemois;
@@ -74,5 +75,43 @@ public class Epargne {
 
     public void setMontantobjectif(double montantobjectif) {
         this.montantobjectif = montantobjectif;
+    }
+
+    public void setHasRecurence(boolean recurence){this.hasRecurence = recurence;}
+    public boolean getHasRecurrence(){return this.hasRecurence;}
+
+    public Integer getRecurrenceAnneeMois(){
+        return this.recurrenceAnneeMois;
+    }
+    public void setRecurrenceAnneeMois(String recurrenceAnneeMois){
+        this.recurrenceAnneeMois = Integer.parseInt(recurrenceAnneeMois);
+    }
+
+    public void setRecurrenceAnneeMois(int recurrenceAnneeMois){
+        this.recurrenceAnneeMois = recurrenceAnneeMois;
+    }
+
+    public Integer getRecurrenceNumeroMois(){
+        return this.recurrenceNumeroMois;
+    }
+
+    public void setRecurrenceNumeroMois(int recurrenceNumeroMois){
+        this.recurrenceNumeroMois = recurrenceNumeroMois;
+    }
+
+    public void setRecurrenceNumeroMois(String recurrenceNumeroMois){
+        this.recurrenceNumeroMois = Integer.parseInt(recurrenceNumeroMois);
+    }
+
+    public Integer getRecurrenceTousLesNMois() {
+        return recurrenceTousLesNMois;
+    }
+
+    public void setRecurrenceTousLesNMois(int recurrenceTousLesNMois) {
+        this.recurrenceTousLesNMois = recurrenceTousLesNMois;
+    }
+
+    public void setRecurrenceTousLesNMois(String recurrenceTousLesNMois) {
+        this.recurrenceTousLesNMois = Integer.parseInt(recurrenceTousLesNMois);
     }
 }

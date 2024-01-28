@@ -7,7 +7,6 @@ import ch.heig.bdr.budget.home.mapper.HomeMapper;
 import ch.heig.bdr.budget.home.repository.HomeRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -24,23 +23,12 @@ public class HomeRepositoryImpl implements HomeRepository {
     }
 
     @Override
-    public Home getTotalDepenseByMonth() {
-        return mapper.getTotalMonthDepense();
+    public List<Home> getTotalByMonth() {
+        return mapper.getTotalByMonth();
     }
 
     @Override
-    public Home getTotalRecetteByMonth() {
-        return mapper.getTotalMonthRecette();
+    public Home getAvgLast12Month() {
+        return mapper.getAvgLast12Month();
     }
-
-    @Override
-    public Home getTotalRevenuByMonth() {
-        return mapper.getTotalMonthRevenu();
-    }
-
-    @Override
-    public Home getTotalEpargneByMonth() {
-        return mapper.getTotalMonthEpargne();
-    }
-
 }

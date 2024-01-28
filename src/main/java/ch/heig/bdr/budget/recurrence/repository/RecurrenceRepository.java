@@ -6,4 +6,5 @@ import java.util.List;
 public interface RecurrenceRepository {
     List<Recurrence> getAllRecurrences();
     void addRecurrence(Recurrence recurrence);
+    void addRecurrenceWithoutEnd(Recurrence recurrence);
 }

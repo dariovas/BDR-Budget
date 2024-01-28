@@ -4,6 +4,8 @@ import ch.heig.bdr.budget.categorie.domain.Categorie;
 import ch.heig.bdr.budget.categorie.repository.CategorieRepository;
 import ch.heig.bdr.budget.depense.domain.Depense;
 import ch.heig.bdr.budget.epargne.repository.EpargneRepository;
+import ch.heig.bdr.budget.recurrence.domain.Recurrence;
+import ch.heig.bdr.budget.recurrence.repository.RecurrenceRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +20,13 @@ import java.util.List;
 public class EpargneController {
     private final EpargneRepository repository;
     private final CategorieRepository categorieRepository;
+    private final RecurrenceRepository recurrenceRepository;
 
-    public EpargneController(EpargneRepository repository, CategorieRepository categorieRepository) {
+    public EpargneController(EpargneRepository repository, CategorieRepository categorieRepository,
+                             RecurrenceRepository recurrenceRepository) {
         this.repository = repository;
         this.categorieRepository = categorieRepository;
+        this.recurrenceRepository = recurrenceRepository;
     }
 
     @GetMapping("/page/{pageNo}")
@@ -57,6 +62,20 @@ public class EpargneController {
     @PostMapping("/add")
     public String add(Epargne epargne){
         repository.addEpargne(epargne);
+
+        if(epargne.getHasRecurrence()){
+            Recurrence recurrence = new Recurrence();
+            recurrence.setIdbudget(epargne.getId());
+            if(epargne.getRecurrenceAnneeMois() != null){
+                recurrence.setAnneemois(epargne.getRecurrenceAnneeMois());
+                recurrence.setNumeromois(epargne.getRecurrenceNumeroMois());
+                recurrence.setTouslesnmois(epargne.getRecurrenceTousLesNMois());
+                recurrenceRepository.addRecurrence(recurrence);
+            }
+            recurrence.setTouslesnmois(epargne.getRecurrenceTousLesNMois());
+            recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
+
+        }
 
         return "redirect:/epargnes";
     }

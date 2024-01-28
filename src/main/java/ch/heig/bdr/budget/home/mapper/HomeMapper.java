@@ -4,6 +4,8 @@ import ch.heig.bdr.budget.home.domain.Home;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface HomeMapper {
     @Select("SELECT\n" +
@@ -23,48 +25,38 @@ public interface HomeMapper {
             "     WHERE b.anneeMois = EXTRACT(YEAR FROM CURRENT_DATE) AND b.numeroMois = EXTRACT(MONTH FROM CURRENT_DATE)) AS total_revenus")
     Home getTotalCurrentMonth();
 
-    @Select("SELECT \n" +
-            "  mois.numero,\n" +
-            "  mois.numeroannee, \n" +
-            "  COALESCE(SUM(budget.montant), 0) AS total_depenses\n" +
-            "FROM budget\n" +
-            "INNER JOIN mois ON budget.anneeMois = mois.numeroannee AND budget.numeroMois = mois.numero\n" +
-            "RIGHT JOIN depense ON budget.id = depense.idSortie\n" +
-            "GROUP BY mois.numero, mois.numeroannee\n" +
-            "ORDER BY mois.numeroannee, mois.numero")
-    Home getTotalMonthDepense();
+    @Select("SELECT\n" +
+            "        mois.nom as mois,\n" +
+            "        mois.numeroannee as annee,\n" +
+            "        COALESCE(SUM(CASE WHEN depense.idSortie IS NOT NULL THEN budget.montant ELSE 0 END), 0) AS total_depenses, \n" +
+            "        COALESCE(SUM(CASE WHEN epargne.idSortie IS NOT NULL THEN budget.montant ELSE 0 END), 0) AS total_epargnes, \n" +
+            "        COALESCE(SUM(CASE WHEN recette.idEntree IS NOT NULL THEN budget.montant ELSE 0 END), 0) AS total_recettes, \n" +
+            "        COALESCE(SUM(CASE WHEN revenue.idEntree IS NOT NULL THEN budget.montant ELSE 0 END), 0) AS total_revenus\n" +
+            "        FROM budget\n" +
+            "        INNER JOIN mois ON budget.anneeMois = mois.numeroannee AND budget.numeroMois = mois.numero\n" +
+            "        LEFT JOIN depense ON budget.id = depense.idSortie\n" +
+            "        LEFT JOIN epargne ON budget.id = epargne.idSortie\n" +
+            "        LEFT JOIN recette ON budget.id = recette.idEntree \n" +
+            "        LEFT JOIN revenue ON budget.id = revenue.idEntree\n" +
+            "        GROUP BY mois.numero, mois.numeroannee\n" +
+            "        ORDER BY mois.numeroannee, mois.numero")
+    List<Home> getTotalByMonth();
 
-    @Select("SELECT \n" +
-            "  mois.numero,\n" +
-            "  mois.numeroannee, \n" +
-            "  COALESCE(SUM(budget.montant), 0) AS total_epargnes\n" +
-            "FROM budget\n" +
-            "INNER JOIN mois ON budget.anneeMois = mois.numeroannee AND budget.numeroMois = mois.numero\n" +
-            "RIGHT JOIN epargne ON budget.id = epargne.idSortie\n" +
-            "GROUP BY mois.numero, mois.numeroannee\n" +
-            "ORDER BY mois.numeroannee, mois.numero")
-    Home getTotalMonthEpargne();
-
-    @Select("SELECT \n" +
-            "  mois.numero,\n" +
-            "  mois.numeroannee, \n" +
-            "  COALESCE(SUM(budget.montant), 0) AS total_recettes\n" +
-            "FROM budget\n" +
-            "INNER JOIN mois ON budget.anneeMois = mois.numeroannee AND budget.numeroMois = mois.numero\n" +
-            "RIGHT JOIN recette ON budget.id = recette.idEntree\n" +
-            "GROUP BY mois.numero, mois.numeroannee\n" +
-            "ORDER BY mois.numeroannee, mois.numero")
-    Home getTotalMonthRecette();
-
-    @Select("SELECT \n" +
-            "  mois.numero,\n" +
-            "  mois.numeroannee, \n" +
-            "  COALESCE(SUM(budget.montant), 0) AS total_revenus\n" +
-            "FROM budget\n" +
-            "INNER JOIN mois ON budget.anneeMois = mois.numeroannee AND budget.numeroMois = mois.numero\n" +
-            "RIGHT JOIN revenue ON budget.id = revenue.idEntree\n" +
-            "GROUP BY mois.numero, mois.numeroannee\n" +
-            "ORDER BY mois.numeroannee, mois.numero")
-    Home getTotalMonthRevenu();
-
+    @Select("SELECT\n" +
+            "    COALESCE(AVG(CASE WHEN depense.idSortie IS NOT NULL THEN budget.montant END), 0) AS avg_depenses, \n" +
+            "    COALESCE(AVG(CASE WHEN epargne.idSortie IS NOT NULL THEN budget.montant END), 0) AS avg_epargnes, \n" +
+            "    COALESCE(AVG(CASE WHEN recette.idEntree IS NOT NULL THEN budget.montant END), 0) AS avg_recettes, \n" +
+            "    COALESCE(AVG(CASE WHEN revenue.idEntree IS NOT NULL THEN budget.montant END), 0) AS avg_revenus\n" +
+            "FROM\n" +
+            "    budget\n" +
+            "    INNER JOIN mois ON budget.anneeMois = mois.numeroannee AND budget.numeroMois = mois.numero\n" +
+            "    LEFT JOIN depense ON budget.id = depense.idSortie\n" +
+            "    LEFT JOIN epargne ON budget.id = epargne.idSortie\n" +
+            "    LEFT JOIN recette ON budget.id = recette.idEntree \n" +
+            "    LEFT JOIN revenue ON budget.id = revenue.idEntree\n" +
+            "WHERE \n" +
+            "    (mois.numero < EXTRACT(MONTH FROM CURRENT_DATE) AND mois.numeroannee = EXTRACT(YEAR FROM CURRENT_DATE)) OR\n" +
+            "    (mois.numero >= EXTRACT(MONTH FROM CURRENT_DATE) AND mois.numeroannee < EXTRACT(YEAR FROM CURRENT_DATE))\n" +
+            "LIMIT 12")
+    Home getAvgLast12Month();
 }

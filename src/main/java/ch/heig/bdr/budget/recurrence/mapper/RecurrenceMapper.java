@@ -20,4 +20,10 @@ public interface RecurrenceMapper {
             "VALUES  (#{idbudget}, #{anneemois}, #{numeromois}, #{touslesnmois})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Recurrence recurrence);
+
+    @Insert("INSERT INTO recurrence(idbudget, anneemois, numeromois, touslesnmois)\n" +
+            "VALUES  (#{idbudget}, NULL, NULL, #{touslesnmois})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insertWithoutEnd(Recurrence recurrence);
 }
+
