@@ -1,6 +1,5 @@
 package ch.heig.bdr.budget.depense.domain;
 
-
 import ch.heig.bdr.budget.categorie.domain.Categorie;
 import ch.heig.bdr.budget.categorie.repository.CategorieRepository;
 import ch.heig.bdr.budget.depense.repository.DepenseRepository;
@@ -29,10 +28,9 @@ public class DepenseController {
 
     @GetMapping("/page/{pageNo}")
     public String listPaginatedDepenses(@PathVariable(value = "pageNo") int pageNo,
+                                        @ModelAttribute DepenseSearchDTO depenseSearchDTO,
                                         Model model)  {
         int pageSize = 3;
-
-
 
         List<Depense> depenses = repository.getAllDepenses();
 
@@ -50,12 +48,16 @@ public class DepenseController {
     }
 
     @GetMapping
-    public String viewDepenses(@RequestParam(name = "beneficiary", required = false) String beneficiary,
-                               Model model) {
+    public String viewDepenses(@ModelAttribute DepenseSearchDTO depenseSearchDTO, Model model) {
+        int pageNo = depenseSearchDTO.getPageNo();
+        String beneficiaire = depenseSearchDTO.getBeneficiaire();
 
-        return listPaginatedDepenses(1, model);
+        return listPaginatedDepenses(pageNo, depenseSearchDTO, model);
     }
-
+    @ModelAttribute("depenseSearchDTO")
+    public DepenseSearchDTO depenseSearchDTO() {
+        return new DepenseSearchDTO();
+    }
     @GetMapping("/add")
     public String showAddForm(Model model){
         List<Categorie> categories = categorieRepository.getAllCategories();
@@ -80,7 +82,6 @@ public class DepenseController {
             recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
 
         }
-
 
         return "redirect:/depenses";
     }

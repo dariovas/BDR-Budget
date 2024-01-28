@@ -22,7 +22,7 @@ public class DepenseRepositoryImpl implements DepenseRepository {
     }
 
     @Override
-    public List<Depense> getDepensesFromBenificiaire(String name) {
+    public List<Depense> searchDepenseByBeneficiaire(String name) {
         return mapper.selectByBeneficiaire(name);
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 public interface DepenseRepository {
     List<Depense> getAllDepenses();
 
-    List<Depense> getDepensesFromBenificiaire(String name);
+    List<Depense> searchDepenseByBeneficiaire(String name);
 
     void addDepense(Depense depense);
 
