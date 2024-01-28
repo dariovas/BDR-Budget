@@ -44,7 +44,9 @@ public class CategorieController {
 
     @GetMapping("/add")
     public String showAddForm(Model model){
+        List<Categorie> categories = repository.getAllCategories();
         model.addAttribute("categorie", new Categorie());
+        model.addAttribute("categories", categories);
         return "ajoutCategorie";
     }
     @PostMapping("/add")

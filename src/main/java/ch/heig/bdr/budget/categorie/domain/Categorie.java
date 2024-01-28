@@ -4,7 +4,7 @@ public class Categorie {
     private Long id;
     private String nom;
     private String description;
-    private Long idParent;
+    private Long idparent;
 
     private String nom_categorie_parente;
 
@@ -24,12 +24,10 @@ public class Categorie {
         this.id = id;
     }
 
-    public Long getIdParent() {
-        return idParent;
-    }
+    public Long getidparent(){return idparent;}
 
-    public void setIdParent(Long idParent) {
-        this.idParent = idParent;
+    public void setidparent(Long idParent) {
+        this.idparent = idParent;
     }
 
     public void setNom(String nom) {

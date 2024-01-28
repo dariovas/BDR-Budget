@@ -9,12 +9,16 @@
 <div class="container">
     <h1>Ajouter une catégorie</h1>
     <form th:action="@{/categories/add}" th:object="${categorie}" method="post">
-        <!-- Ajoutez les champs du formulaire ici, par exemple : -->
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" th:field="*{nom}" required>
         <label for="description">Description :</label>
         <input type="text" id="description" name="nom" th:field="*{description}">
-        <!-- Ajoutez d'autres champs du formulaire au besoin -->
+        <label for="Parent">Catégorie parent :</label>
+        <select id="Parent" name="idparent">
+            <option th:each="cat : ${categories}"
+                    th:value="${cat.id}"
+                    th:text="${cat.nom}">Choisissez une catégorie parent</option>
+        </select>
 
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>

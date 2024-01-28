@@ -1,6 +1,7 @@
 package ch.heig.bdr.budget.recette.domain;
 
 import ch.heig.bdr.budget.categorie.domain.Categorie;
+import ch.heig.bdr.budget.categorie.repository.CategorieRepository;
 import ch.heig.bdr.budget.depense.domain.Depense;
 import ch.heig.bdr.budget.recette.repository.RecetteRepository;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import java.util.List;
 @RequestMapping("/recettes")
 public class RecetteController {
     private final RecetteRepository repository;
+    private final CategorieRepository categorieRepository;
 
-    public RecetteController(RecetteRepository repository) {
+    public RecetteController(RecetteRepository repository, CategorieRepository categorieRepository) {
         this.repository = repository;
+        this.categorieRepository = categorieRepository;
     }
 
     @GetMapping("/page/{pageNo}")
@@ -44,7 +47,9 @@ public class RecetteController {
 
     @GetMapping("/add")
     public String showAddForm(Model model){
+        List<Categorie> categories = categorieRepository.getAllCategories();
         model.addAttribute("recette", new Recette());
+        model.addAttribute("categories", categories);
         return "ajoutRecette";
     }
     @PostMapping("/add")

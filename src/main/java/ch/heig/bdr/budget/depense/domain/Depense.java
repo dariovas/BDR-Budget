@@ -8,6 +8,12 @@ public class Depense {
     private double montant_budget;
     private String beneficiaire;
 
+    private boolean hasRecurence = false;
+    private int recurrenceAnneeMois;
+    private int recurrenceNumeroMois;
+    private int recurrenceTousLesNMois;
+
+
     public Long getId_budget() {
         return id_budget;
     }
@@ -54,5 +60,30 @@ public class Depense {
 
     public void setBeneficiaire(String beneficiaire) {
         this.beneficiaire = beneficiaire;
+    }
+
+    public void setHasRecurence(boolean recurence){this.hasRecurence = recurence;}
+    public boolean getHasRecurrence(){return this.hasRecurence;}
+
+    public int getRecurrenceAnneeMois(){
+        return this.recurrenceAnneeMois;
+    }
+    public void setRecurrenceAnneeMois(int recurrenceAnneeMois){
+        this.recurrenceAnneeMois = recurrenceAnneeMois;
+    }
+    public int getRecurrenceNumeroMois(){
+        return this.recurrenceNumeroMois;
+    }
+
+    public void setRecurrenceNumeroMois(int recurrenceNumeroMois){
+        this.recurrenceNumeroMois = recurrenceNumeroMois;
+    }
+
+    public int getRecurrenceTousLesNMois() {
+        return recurrenceTousLesNMois;
+    }
+
+    public void setRecurrenceTousLesNMois(int recurrenceTousLesNMois) {
+        this.recurrenceTousLesNMois = recurrenceTousLesNMois;
     }
 }

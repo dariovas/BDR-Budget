@@ -1,6 +1,9 @@
 package ch.heig.bdr.budget.home.domain;
 
 public class Home {
+    private int mois;
+    private int annee;
+
     private double total_epargnes;
     private double total_depenses;
     private double total_recettes;
@@ -36,6 +39,22 @@ public class Home {
 
     public void setTotal_revenus(double total_revenus) {
         this.total_revenus = total_revenus;
+    }
+
+    public int getMois() {
+        return mois;
+    }
+
+    public void setMois(int mois) {
+        this.mois = mois;
+    }
+
+    public int getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(int annee) {
+        this.annee = annee;
     }
 
     public double getTotal(){

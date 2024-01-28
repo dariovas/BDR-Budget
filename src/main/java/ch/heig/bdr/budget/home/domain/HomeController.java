@@ -18,6 +18,16 @@ public class HomeController {
 
     @GetMapping
     public String homePage(Model model) {
+        Home depense = repository.getTotalDepenseByMonth();
+        Home recette = repository.getTotalRecetteByMonth();
+        Home revenu = repository.getTotalRevenuByMonth();
+        Home epargne = repository.getTotalEpargneByMonth();
+
+        model.addAttribute("depense", depense);
+        model.addAttribute("recette", recette);
+        model.addAttribute("revenu", revenu);
+        model.addAttribute("epargne", epargne);
+
         Home homeData = repository.getAllHomes();
         model.addAttribute("home", homeData);
         return "home";

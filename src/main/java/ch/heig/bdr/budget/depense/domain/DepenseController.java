@@ -2,7 +2,10 @@ package ch.heig.bdr.budget.depense.domain;
 
 
 import ch.heig.bdr.budget.categorie.domain.Categorie;
+import ch.heig.bdr.budget.categorie.repository.CategorieRepository;
 import ch.heig.bdr.budget.depense.repository.DepenseRepository;
+import ch.heig.bdr.budget.recurrence.domain.Recurrence;
+import ch.heig.bdr.budget.recurrence.repository.RecurrenceRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +19,15 @@ import java.util.List;
 @RequestMapping("/depenses")
 public class DepenseController {
     private final DepenseRepository repository;
+    private final CategorieRepository categorieRepository;
+    private final RecurrenceRepository recurrenceRepository;
 
-    public DepenseController(DepenseRepository repository) {
+
+    public DepenseController(DepenseRepository repository, CategorieRepository categorieRepository,
+                             RecurrenceRepository recurrenceRepository) {
         this.repository = repository;
+        this.categorieRepository = categorieRepository;
+        this.recurrenceRepository = recurrenceRepository;
     }
 
     @GetMapping("/page/{pageNo}")
@@ -46,12 +55,18 @@ public class DepenseController {
 
     @GetMapping("/add")
     public String showAddForm(Model model){
+        List<Categorie> categories = categorieRepository.getAllCategories();
         model.addAttribute("depense", new Depense());
+        model.addAttribute("categories", categories);
         return "ajoutDepense";
     }
     @PostMapping("/add")
     public String add(Depense depense){
         repository.addDepense(depense);
+        if(depense.getHasRecurrence()){
+            Recurrence recurrence = new Recurrence();
+            recurrenceRepository.addRecurrence(recurrence);
+        }
 
         return "redirect:/depenses";
     }

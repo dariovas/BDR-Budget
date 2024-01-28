@@ -1,6 +1,7 @@
 package ch.heig.bdr.budget.epargne.domain;
 
 import ch.heig.bdr.budget.categorie.domain.Categorie;
+import ch.heig.bdr.budget.categorie.repository.CategorieRepository;
 import ch.heig.bdr.budget.depense.domain.Depense;
 import ch.heig.bdr.budget.epargne.repository.EpargneRepository;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import java.util.List;
 @RequestMapping("/epargnes")
 public class EpargneController {
     private final EpargneRepository repository;
+    private final CategorieRepository categorieRepository;
 
-    public EpargneController(EpargneRepository repository) {
+    public EpargneController(EpargneRepository repository, CategorieRepository categorieRepository) {
         this.repository = repository;
+        this.categorieRepository = categorieRepository;
     }
 
     @GetMapping("/page/{pageNo}")
@@ -46,7 +49,9 @@ public class EpargneController {
 
     @GetMapping("/add")
     public String showAddForm(Model model){
+        List<Categorie> categories = categorieRepository.getAllCategories();
         model.addAttribute("epargne", new Epargne());
+        model.addAttribute("categories", categories);
         return "ajoutEpargne";
     }
     @PostMapping("/add")

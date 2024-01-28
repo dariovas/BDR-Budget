@@ -23,7 +23,7 @@ public interface CategorieMapper {
     @Update("UPDATE Categorie SET ")
     Categorie update();
 
-    @Insert("INSERT INTO Categorie (nom, description) VALUES (#{nom}, #{description})")
+    @Insert("INSERT INTO Categorie (nom, description, idparent) VALUES (#{nom}, #{description}, #{idparent})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Categorie categorie);
 }

@@ -7,15 +7,19 @@
 
 <body>
 <div class="container">
-    <h1>Ajouter un revenu</h1>
+    <h1>Ajouter une épargne</h1>
     <form th:action="@{/epargnes/add}" th:object="${epargne}" method="post">
         <!-- Ajoutez les champs du formulaire ici, par exemple : -->
         <label for="annee">Année :</label>
         <input type="text" id="annee" name="nom" th:field="*{anneemois}" required>
         <label for="mois">Mois :</label>
         <input type="text" id="mois" name="nom" th:field="*{numeromois}">
-        <label for="categorie">ID Catégorie :</label>
-        <input type="text" id="categorie" name="nom" th:field="*{idCategorie}">
+        <label for="categorie">Catégorie :</label>
+        <select id="categorie" name="idCategorie">
+            <option th:each="categorie : ${categories}"
+                    th:value="${categorie.id}"
+                    th:text="${categorie.nom}">Choisissez une catégorie</option>
+        </select>
         <label for="montant">Montant :</label>
         <input type="text" id="montant" name="nom" th:field="*{montant_budget}">
         <label for="idobjep">ID Objectif Epargne :</label>

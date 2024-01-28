@@ -1,7 +1,7 @@
 package ch.heig.bdr.budget.depense.mapper;
 
 import ch.heig.bdr.budget.depense.domain.Depense;
-import ch.heig.bdr.budget.revenu.domain.Revenu;
+import ch.heig.bdr.budget.categorie.domain.Categorie;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
