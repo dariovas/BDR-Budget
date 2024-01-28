@@ -101,9 +101,11 @@ public class EpargneController {
                 recurrence.setNumeromois(epargne.getRecurrenceNumeroMois());
                 recurrence.setTouslesnmois(epargne.getRecurrenceTousLesNMois());
                 recurrenceRepository.addRecurrence(recurrence);
+            }else{
+                recurrence.setTouslesnmois(epargne.getRecurrenceTousLesNMois());
+                recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
             }
-            recurrence.setTouslesnmois(epargne.getRecurrenceTousLesNMois());
-            recurrenceRepository.addRecurrenceWithoutEnd(recurrence);
+
 
         }
         // retourne la page epargnes.html

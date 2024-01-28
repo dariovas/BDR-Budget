@@ -2,18 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <!-- Les balises head et les liens vers les feuilles de style et les scripts JS vont ici -->
+    <script th:src="@{/js/updateFieldsState.js}" defer="defer"></script>
 </head>
 
 <body>
 <div class="container">
     <h1>Ajouter une Dépense</h1>
     <form th:action="@{/depenses/add}" th:object="${depense}" method="post">
-        <!-- Ajoutez les champs du formulaire ici, par exemple : -->
         <label for="annee">Année :</label>
-        <input type="text" id="annee" name="nom" th:field="*{anneemois}" required>
+        <input type="number" id="annee" name="nom" th:field="*{anneemois}" required>
         <label for="mois">Mois :</label>
-        <input type="text" id="mois" name="nom" th:field="*{numeromois}">
+        <input type="number" id="mois" name="nom" th:field="*{numeromois}">
         <label for="categorie">Catégorie :</label>
         <select id="categorie" name="idCategorie">
             <option th:each="categorie : ${categories}"
@@ -26,24 +25,23 @@
         <input type="text" id="beneficiaire" name="nom" th:field="*{beneficiaire}">
 
         <div>
-            <input type="checkbox" id="hasRecurence" name="hasRecurence">
-            <label for="hasRecurence">Activer la récurrence</label>
+            <input type="checkbox" id="hasRecurrence" name="hasRecurrence">
+            <label for="hasRecurrence">Activer la récurrence</label>
         </div>
 
         <label for="recurrenceAnneeMois">Année de fin de la récurrence :</label>
-        <input type="text" id="recurrenceAnneeMois" name="recurrenceAnneeMois">
+        <input type="number" id="recurrenceAnneeMois" name="recurrenceAnneeMois" th:disabled="${not depense.getHasRecurrence()}">
 
         <label for="recurrenceNumeroMois">Mois de la fin de la récurrence :</label>
-        <input type="text" id="recurrenceNumeroMois" name="recurrenceNumeroMois">
+        <input type="number" id="recurrenceNumeroMois" name="recurrenceNumeroMois" th:disabled="${not depense.getHasRecurrence()}">
 
         <label for="recurrenceTousLesNMois">Répéter tous les N mois :</label>
-        <input type="text" id="recurrenceTousLesNMois" name="recurrenceTousLesNMois">
+        <input type="number" id="recurrenceTousLesNMois" name="recurrenceTousLesNMois" th:disabled="${not depense.getHasRecurrence()}">
 
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>
 </div>
 
-<!-- Les scripts JS peuvent aller ici -->
 </body>
 
 </html>
