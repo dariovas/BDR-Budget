@@ -66,6 +66,8 @@
         <table border="1" class="table table-striped table-responsive-md">
             <thead>
             <tr>
+                <th>Mois</th>
+                <th>Année</th>
                 <th>Montant</th>
                 <th>Montant Objectif</th>
                 <th>Nom catégorie</th>
@@ -73,6 +75,8 @@
             </thead>
             <tbody>
             <tr th:each="epargne : ${epargnes}">
+                <td th:text="${epargne.getNumeromois()}"></td>
+                <td th:text="${epargne.getAnneemois()}"></td>
                 <td th:text="${epargne.getMontant_budget()}"></td>
                 <td th:text="${epargne.getMontantobjectif()}"></td>
                 <td th:text="${epargne.getNom_categorie()}"></td>

@@ -70,12 +70,16 @@
         <table border="1" class="table table-striped table-responsive-md">
             <thead>
                 <tr>
+                    <th>Mois</th>
+                    <th>Année</th>
                     <th>Montant</th>
                     <th>Bénéficiaire</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="depense : ${depenses}">
+                    <td th:text="${depense.getNumeromois()}"></td>
+                    <td th:text="${depense.getAnneemois()}"></td>
                     <td th:text="${depense.getMontant_budget()}"></td>
                     <td th:text="${depense.getBeneficiaire()}"></td>
                 </tr>
