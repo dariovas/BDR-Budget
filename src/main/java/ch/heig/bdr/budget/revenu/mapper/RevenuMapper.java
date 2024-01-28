@@ -32,7 +32,6 @@ public interface RevenuMapper {
      * @param revenu : revenu à insérer
      * @return : nombre de lignes insérées
      */
-
     @Insert("WITH InsertionBudget AS (\n" +
             "    INSERT INTO budget(anneeMois, numeroMois, idCategorie, montant)\n" +
             "    VALUES (#{anneemois}, #{numeromois}, #{idCategorie}, #{montant_budget}) \n" +
