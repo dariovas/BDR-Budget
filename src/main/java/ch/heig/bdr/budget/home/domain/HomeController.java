@@ -20,9 +20,16 @@ public class HomeController {
         this.repository = repository;
     }
 
+    /***
+     * Affiche la liste des dépenses paginée
+     * @param pageNo :  numéro de la page à afficher
+     * @param model : modèle de la page
+     * @return : nom de la page à afficher
+     */
     @GetMapping("/page/{pageNo}")
     public String listPaginatedHome(@PathVariable(value = "pageNo") int pageNo, Model model) {
 
+        // Nombre d'éléments par page
         int pageSize = 3;
         List<Home> homeData = repository.getTotalByMonth();
         Home homeAvgLast12Month = repository.getAvgLast12Month();
@@ -30,18 +37,27 @@ public class HomeController {
         int startIndex = (pageNo - 1) * pageSize;
         int endIndex = Math.min(startIndex + pageSize, homeData.size());
 
+        // Sous-liste des résumés à afficher
         List<Home> homeCurrentPage = homeData.subList(startIndex, endIndex);
 
+        // Ajout des attributs au modèle
         model.addAttribute("homes", homeCurrentPage);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", (int) Math.ceil((double) homeData.size() / pageSize));
         model.addAttribute("totalItems", homeData.size());
 
+        //Ajout de la moyenne des 12 derniers mois
         model.addAttribute("homesAvg", homeAvgLast12Month);
 
+        // retourne la page home.html
         return "home";
     }
 
+    /***
+     * Affiche la liste des dépenses paginée
+     * @param model : modèle de la page
+     * @return : nom de la page à afficher
+     */
     @GetMapping
     public String homePage(Model model){
         return listPaginatedHome(1, model);

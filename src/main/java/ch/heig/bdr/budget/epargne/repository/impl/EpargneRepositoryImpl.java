@@ -11,15 +11,27 @@ import java.util.List;
 public class EpargneRepositoryImpl implements EpargneRepository {
     private EpargneMapper mapper;
 
+    /***
+     * Constructeur
+     * @param mapper : mapper de la classe
+     */
     public EpargneRepositoryImpl(EpargneMapper mapper) {
         this.mapper = mapper;
     }
 
+    /***
+     * Retourne toutes les épargnes
+     * @return : toutes les épargnes
+     */
     @Override
     public List<Epargne> getAllEpargne() {
         return mapper.selectAll();
     }
 
+    /***
+     * Rajoute une épargne
+     * @param epargne : épargne à rajouter
+     */
     @Override
     public void addEpargne(Epargne epargne) {
         mapper.insert(epargne);

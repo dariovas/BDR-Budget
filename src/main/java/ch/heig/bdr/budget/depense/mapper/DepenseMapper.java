@@ -10,14 +10,34 @@ import java.util.List;
 @Mapper
 public interface DepenseMapper {
 
+    /***
+     * Sélectionne une dépense par son id
+     * @param id :  id de la dépense à sélectionner
+     * @return  : dépense sélectionnée
+     */
     @Select("SELECT * FROM vue_depense WHERE id = #{id}")
     Depense select(Long id);
 
+    /**
+     * Sélectionne toutes les dépenses
+     * @return : liste des dépenses
+     */
     @Select("SELECT * FROM vue_depense")
     List<Depense> selectAll();
 
+    /***
+     * Sélectionne les dépenses d'un bénéficiaire
+     * @param name : nom du bénéficiaire
+     * @return : liste des dépenses du bénéficiaire
+     */
     @Select("SELECT * FROM vue_depense WHERE beneficiaire LIKE '#{name}'")
     List<Depense> selectByBeneficiaire(String name);
+
+    /***
+     * Insére une nouvelle dépense
+     * @param depense : dépense à insérer
+     * @return : nombre de lignes insérées
+     */
     @Insert("WITH InsertionBudget AS (\n" +
             "    INSERT INTO budget(anneeMois, numeroMois, idCategorie, montant)\n" +
             "    VALUES (#{anneemois}, #{numeromois}, #{idCategorie}, #{montant_budget}) \n" +

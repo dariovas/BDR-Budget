@@ -8,6 +8,10 @@ import java.util.List;
 
 @Mapper
 public interface HomeMapper {
+    /***
+     * Retourne le total des épargnes, dépenses, recettes et revenus du mois courant
+     * @return : total des épargnes, dépenses, recettes et revenus du mois courant
+     */
     @Select("SELECT\n" +
             "    (SELECT SUM(b.montant) FROM budget b JOIN epargne e ON b.id = e.idSortie\n" +
             "     WHERE b.anneeMois = EXTRACT(YEAR FROM CURRENT_DATE) AND b.numeroMois = EXTRACT(MONTH FROM CURRENT_DATE)) AS total_epargnes,\n" +
@@ -25,6 +29,10 @@ public interface HomeMapper {
             "     WHERE b.anneeMois = EXTRACT(YEAR FROM CURRENT_DATE) AND b.numeroMois = EXTRACT(MONTH FROM CURRENT_DATE)) AS total_revenus")
     Home getTotalCurrentMonth();
 
+    /***
+     * Retourne le total des épargnes, dépenses, recettes et revenus du mois courant
+     * @return
+     */
     @Select("SELECT\n" +
             "        mois.nom as mois,\n" +
             "        mois.numeroannee as annee,\n" +
@@ -42,6 +50,10 @@ public interface HomeMapper {
             "        ORDER BY mois.numeroannee, mois.numero")
     List<Home> getTotalByMonth();
 
+    /***
+     * Retourne la moyenne des épargnes, dépenses, recettes et revenus des 12 derniers mois
+     * @return : moyenne des épargnes, dépenses, recettes et revenus des 12 derniers mois
+     */
     @Select("SELECT\n" +
             "    COALESCE(AVG(CASE WHEN depense.idSortie IS NOT NULL THEN budget.montant END), 0) AS avg_depenses, \n" +
             "    COALESCE(AVG(CASE WHEN epargne.idSortie IS NOT NULL THEN budget.montant END), 0) AS avg_epargnes, \n" +

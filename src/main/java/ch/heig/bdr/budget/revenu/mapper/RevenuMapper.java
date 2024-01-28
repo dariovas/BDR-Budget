@@ -11,11 +11,27 @@ import java.util.List;
 
 @Mapper
 public interface RevenuMapper {
+
+    /***
+     * Selectione un revenu selon son ID
+     * @param id : id du revenu
+     * @return : revenu sélectionné
+     */
     @Select("SELECT * FROM vue_revenue WHERE id = #{id}")
     Revenu select(Long id);
 
+    /***
+     * Sélectionne tous les revenus
+     * @return : revenus sélectionnés
+     */
     @Select("SELECT * FROM vue_revenue")
     List<Revenu> selectAll();
+
+    /***
+     * Insére un nouveau revenu
+     * @param revenu : revenu à insérer
+     * @return : nombre de lignes insérées
+     */
 
     @Insert("WITH InsertionBudget AS (\n" +
             "    INSERT INTO budget(anneeMois, numeroMois, idCategorie, montant)\n" +

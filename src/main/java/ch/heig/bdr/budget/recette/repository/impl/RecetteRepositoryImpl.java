@@ -11,15 +11,27 @@ import java.util.List;
 public class RecetteRepositoryImpl implements RecetteRepository {
     private RecetteMapper mapper;
 
+    /***
+     * Constructeur
+     * @param mapper : mapper de la classe
+     */
     public RecetteRepositoryImpl(RecetteMapper mapper) {
         this.mapper = mapper;
     }
 
+    /***
+     * Retourne toutes les recettes
+     * @return : toutes les recettes
+     */
     @Override
     public List<Recette> getAllRecettes() {
         return mapper.selectAll();
     }
 
+    /***
+     * Rajoute une recette
+     * @param recette : recette à rajouter
+     */
     @Override
     public void addRecette(Recette recette) {
         mapper.insert(recette);

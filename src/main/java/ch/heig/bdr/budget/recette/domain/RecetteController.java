@@ -29,9 +29,16 @@ public class RecetteController {
         this.recurrenceRepository = recurrenceRepository;
     }
 
+    /***
+     * Affiche la liste des recettes paginée
+     * @param pageNo : numéro de la page à afficher
+     * @param model : modèle de la page
+     * @return : nom de la page à afficher
+     */
     @GetMapping("/page/{pageNo}")
     public String listPaginatedRecettes(@PathVariable(value = "pageNo") int pageNo, Model model) {
 
+        // Nombre d'éléments par page
         int pageSize = 3;
         List<Recette> recettes = repository.getAllRecettes();
         int startIndex = (pageNo - 1) * pageSize;
@@ -39,31 +46,54 @@ public class RecetteController {
 
         List<Recette> recettesCurrentPage = recettes.subList(startIndex, endIndex);
 
+        // Ajout des attributs au modèle
         model.addAttribute("recettes", recettesCurrentPage);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", (int) Math.ceil((double) recettes.size() / pageSize));
         model.addAttribute("totalItems", recettes.size());
 
+        // retourne la page recettes.html
         return "recettes";
     }
 
+    /***
+     * Affiche la liste des recettes
+     * @param model : modèle de la page
+     * @return : nom de la page à afficher
+     */
     @GetMapping
     public String viewRecettes(Model model){return listPaginatedRecettes(1, model); }
 
+    /***
+     * Affiche le formulaire d'ajout d'une recette
+     * @param model : modèle de la page
+     * @return : nom de la page à afficher
+     */
     @GetMapping("/add")
     public String showAddForm(Model model){
+        // Récupère toutes les catégories
         List<Categorie> categories = categorieRepository.getAllCategories();
+        // Ajout des attributs au modèle
         model.addAttribute("recette", new Recette());
         model.addAttribute("categories", categories);
+        // retourne la page ajoutRecette.html
         return "ajoutRecette";
     }
+
+    /***
+     * Ajoute une recette
+     * @param recette : recette à ajouter
+     * @return : nom de la page à afficher
+     */
     @PostMapping("/add")
     public String add(Recette recette){
         repository.addRecette(recette);
 
+        // Si la recette a une récurrence
         if(recette.getHasRecurrence()){
             Recurrence recurrence = new Recurrence();
             recurrence.setIdbudget(recette.getId());
+            // Si la récurrence a une fin ou pas
             if(recette.getRecurrenceAnneeMois() != null){
                 recurrence.setAnneemois(recette.getRecurrenceAnneeMois());
                 recurrence.setNumeromois(recette.getRecurrenceNumeroMois());
@@ -75,6 +105,7 @@ public class RecetteController {
 
         }
 
+        // retourne la page recettes.html
         return "redirect:/recettes";
     }
 }

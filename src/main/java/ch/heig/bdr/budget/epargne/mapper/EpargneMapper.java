@@ -12,12 +12,27 @@ import java.util.List;
 
 @Mapper
 public interface EpargneMapper {
+    /***
+     * Sélectionne une épargne par son id
+     * @param id : id de l'épargne à sélectionner
+     * @return : épargne sélectionnée
+     */
     @Select("SELECT * FROM vue_epargne WHERE id = #{id}")
     Epargne select(Long id);
 
+    /***
+     * Sélectionne toutes les épargnes
+     * @return : liste des épargnes
+     */
     @Select("SELECT * FROM vue_epargne")
     List<Epargne> selectAll();
 
+
+    /***
+     * Insére une nouvelle épargne
+     * @param epargne : épargne à insérer
+     * @return : nombre de lignes insérées
+     */
     @Insert("WITH InsertionBudget AS (\n" +
             "    INSERT INTO budget(anneeMois, numeroMois, idCategorie, montant)\n" +
             "    VALUES (#{anneemois}, #{numeromois}, #{idCategorie}, #{montant_budget}) \n" +
