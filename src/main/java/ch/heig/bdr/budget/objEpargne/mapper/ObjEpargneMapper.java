@@ -12,6 +12,10 @@ import java.util.List;
 @Mapper
 public interface ObjEpargneMapper {
 
+    /***
+     * Sélectionne tous les objectifs d'épargne
+     * @return : objectifs d'épargne sélectionnés
+     */
     @Select("SELECT \n" +
             "    oe.id,\n" +
             "    oe.idCategorie,\n" +
@@ -39,6 +43,11 @@ public interface ObjEpargneMapper {
 
 
 
+    /***
+     * Insére un nouvel objectif d'épargne
+     * @param objEpargne : objectif d'épargne à insérer
+     * @return : nombre de lignes insérées
+     */
     @Insert("INSERT INTO objectifEpargne(idCategorie, anneeMois, numeroMois, montant)\n" +
             "    VALUES  (#{idCategorie}, #{anneemois}, #{numeromois}, #{montant})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
